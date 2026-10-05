@@ -1,21 +1,3 @@
-// // #include <Arduino.h>
-
-// // // put function declarations here:
-// // int myFunction(int, int);
-
-// // void setup() {
-// //   // put your setup code here, to run once:
-// //   int result = myFunction(2, 3);
-// // }
-
-// // void loop() {
-// //   // put your main code here, to run repeatedly:
-// // }
-
-// // // put function definitions here:
-// // int myFunction(int x, int y) {
-// //   return x + y;
-// // }
 
 // import the libreries
 // #include <Arduino.h>
@@ -103,24 +85,18 @@
 //     FastLED.setBrightness(BRIGHTNESS);
 // }
 
-// void loop() {
-//     FastLED.clear();
-//     leds[0] = CRGB::Red; // הדלקת הלד הראשון באדום
-//     FastLED.show();
-//     delay(1000);
-// }
+
 #include <Arduino.h>
 #include "fft_engine.h"
+#include "led_display.h"
 
 void setup() {
     Serial.begin(115200);
     delay(1000);
-
-    // אתחול רכיב השמע והמיקרופון
     initI2S(); 
     Serial.println("I2S Initialized Successfully");
-
-    // כאן נוסיף בהמשך גם את אתחול הלדים: initLEDs();
+    initLEDs();
+    Serial.println("LEDs Initialized Successfully");
 }
 
 void loop() {
@@ -135,8 +111,7 @@ void loop() {
 
     computeFFT(fft_input, SAMPLES);
 
-    // 3. כאן תיכנס הקריאה לפונקציית העדכון של הלדים:
-    // updateLEDs();
+    updateLEDs();
 
     delay(10); // השהייה קטנה ליציבות
 }
